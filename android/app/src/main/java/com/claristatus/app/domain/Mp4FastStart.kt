@@ -116,7 +116,7 @@ object Mp4FastStart {
                 raf.readFully(moovBytes)
 
                 // Patch chunk offsets inside moovBytes: shift by moovSize
-                patchChunkOffsets(moovBytes, moovSize)
+                patchChunkOffsets(moovBytes, ftypSize + moovSize - mdatOffset)
 
                 // Write out new file: ftyp -> modified moov -> mdat -> any other remaining atoms
                 FileOutputStream(tempFile).use { fos ->
